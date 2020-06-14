@@ -1,4 +1,17 @@
 package com.quick.tor.log
 
-class LoggerImpl {
+import mu.KotlinLogging
+import java.lang.Exception
+
+class LoggerImpl(
+    private val logger: KotlinLogging
+): Logger {
+    override fun info(message: String) {
+        logger.logger(this.toString()).info(message)
+    }
+
+    override fun exception(message: String, exception: Exception) {
+        logger.logger(this.toString()).catching(exception)
+    }
+
 }

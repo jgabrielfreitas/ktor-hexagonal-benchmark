@@ -1,0 +1,7 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api "org.koin:koin-ktor:$koin_version"
+    implementation "io.github.microutils:kotlin-logging:$kotlin_logging"
+}

@@ -11,6 +11,5 @@ dependencies {
     api "ch.qos.logback:logback-classic:$logback_version"
     api "io.ktor:ktor-server-core:$ktor_version"
     api "io.ktor:ktor-gson:$ktor_version"
-    api "org.koin:koin-ktor:$koin_version"
-    implementation project(':domain')
+    api project(':domain')
 }

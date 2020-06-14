@@ -1,4 +1,8 @@
 package com.quick.tor.controller
 
-class BaseController {
+import io.ktor.application.Application
+
+open class BaseController(
+    val application: Application
+) {
 }

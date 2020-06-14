@@ -1,5 +1,5 @@
-apply plugin: 'org.jetbrains.kotlin.jvm'
+apply plugin: 'kotlin'
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"
+    api project(':shared')
 }

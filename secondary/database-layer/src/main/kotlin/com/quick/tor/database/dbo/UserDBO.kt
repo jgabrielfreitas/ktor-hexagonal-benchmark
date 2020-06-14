@@ -1,4 +1,4 @@
-package com.quick.tor.database
+package com.quick.tor.database.dbo
 
 import com.quick.tor.usecases.user.model.User
 import org.jetbrains.exposed.sql.Table

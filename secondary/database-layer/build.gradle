@@ -1,15 +1,6 @@
 apply plugin: 'kotlin'
 
-repositories {
-    mavenCentral()
-    jcenter()
-    maven { url 'https://kotlin.bintray.com/ktor' }
-}
-
 dependencies {
-    api "io.ktor:ktor-server-netty:$ktor_version"
-    api "ch.qos.logback:logback-classic:$logback_version"
-    api "io.ktor:ktor-server-core:$ktor_version"
-    api "io.ktor:ktor-gson:$ktor_version"
     api project(':domain')
+    implementation "org.jetbrains.exposed:exposed-core:$exposed"
 }

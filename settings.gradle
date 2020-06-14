@@ -2,7 +2,13 @@ rootProject.name = "ktor-hexagonal-benchmark"
 
 include 'main'
 include 'domain'
+include 'shared'
 
 // primary
 include 'rest'
 project(":rest").projectDir = file("primary/rest")
+
+
+// secondary
+include 'database-layer'
+project(":database-layer").projectDir = file("secondary/database-layer")

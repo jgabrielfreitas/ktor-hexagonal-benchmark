@@ -1,6 +1,7 @@
 package com.quick.tor.hello.controller
 
 import com.quick.tor.common.stringParameter
+import com.quick.tor.controller.BaseController
 import io.ktor.application.Application
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
@@ -9,8 +10,8 @@ import io.ktor.routing.get
 import io.ktor.routing.routing
 
 class HelloWorldController(
-    val application: Application
-) {
+    application: Application
+) : BaseController(application) {
 
     init {
 
