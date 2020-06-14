@@ -28,10 +28,6 @@ hs_err_pid*
 /build
 .gradle
 .idea
-build/
-/main/build/kotlin/compileKotlin/
-/primary/rest/build/kotlin/
-/main/build/kotlin/compileKotlin/
 
 .DS_Store
 
