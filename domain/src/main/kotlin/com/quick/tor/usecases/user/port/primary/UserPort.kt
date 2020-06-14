@@ -1,4 +1,4 @@
-package com.quick.tor.usecases.port.primary
+package com.quick.tor.usecases.user.port.primary
 
 import com.quick.tor.usecases.user.model.User
 import java.util.UUID

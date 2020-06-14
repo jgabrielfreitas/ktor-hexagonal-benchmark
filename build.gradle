@@ -7,6 +7,7 @@ buildscript {
         koin_version = '2.1.0'
         kotlin_logging = '1.7.10'
         exposed = '0.25.1'
+        hikaricp_version = '3.4.2'
     }
 
     repositories {
