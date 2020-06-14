@@ -26,3 +26,6 @@ hs_err_pid*
 /build
 .gradle
 .idea
+/main/build/kotlin/compileKotlin/
+/primary/rest/build/kotlin/
+/main/build/kotlin/compileKotlin/
