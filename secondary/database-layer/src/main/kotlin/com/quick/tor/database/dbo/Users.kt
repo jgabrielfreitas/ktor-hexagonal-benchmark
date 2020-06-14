@@ -7,17 +7,39 @@ import com.quick.tor.database.dbo.Users.idempotencyId
 import com.quick.tor.database.dbo.Users.name
 import com.quick.tor.database.dbo.Users.sentNotification
 import com.quick.tor.usecases.user.model.User
+import org.jetbrains.exposed.dao.id.EntityID
+import org.jetbrains.exposed.dao.id.UUIDTable
 import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.Table
+import org.jetbrains.exposed.sql.statements.InsertStatement
+import org.jetbrains.exposed.sql.statements.UpdateStatement
 import java.util.*
 
 
-object Users: Table("users") {
-    val id = uuid("id").autoIncrement()
+object Users: UUIDTable("users") {
     var name = text("name")
     var email = text("email")
     var sentNotification = bool("sent_notification")
-    val idempotencyId = text("idempotency_id")
+    var idempotencyId = text("idempotency_id")
+
+    fun fromDbo(
+        it: InsertStatement<EntityID<UUID>>,
+        userDbo: UserDBO
+    ) {
+        it[name] = userDbo.name
+        it[email] = userDbo.email
+        it[sentNotification] = userDbo.sentNotification
+        it[idempotencyId] = userDbo.idempotencyId.toString()
+    }
+
+    fun fromDbo(
+        it: UpdateStatement,
+        userDbo: UserDBO
+    ) {
+        it[name] = userDbo.name
+        it[email] = userDbo.email
+        it[sentNotification] = userDbo.sentNotification
+        it[idempotencyId] = userDbo.idempotencyId.toString()
+    }
 }
 
 data class UserDBO(
@@ -38,27 +60,9 @@ data class UserDBO(
 }
 
 fun ResultRow.toUserDbo() = UserDBO(
-    id = getOrNull(id),
+    id = getOrNull(id)?.value,
     name = get(name),
     email = get(email),
     sentNotification = get(sentNotification),
     idempotencyId = get(idempotencyId).toUUID()
 )
-
-fun ResultRow.toUserModel() = User(
-    id = getOrNull(id),
-    name = get(name),
-    email = get(email),
-    sentNotification = get(sentNotification),
-    idempotencyId = get(idempotencyId).toUUID()
-)
-
-//
-//fun User.toDbo() = UserDBO
-////    UserDBO(
-////        id = id.toString(),
-////        name = name,
-////        email = email,
-////        sentNotification = sentNotification,
-////        idempotencyId = idempotencyId.toString()
-////    )

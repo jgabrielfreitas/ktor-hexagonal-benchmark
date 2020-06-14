@@ -1,7 +1,9 @@
 package com.quick.tor.database.commons
 
 import org.jetbrains.exposed.sql.Database
+import org.jetbrains.exposed.sql.StdOutSqlLogger
 import org.jetbrains.exposed.sql.Transaction
+import org.jetbrains.exposed.sql.addLogger
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.experimental.suspendedTransaction
@@ -24,6 +26,7 @@ class DatabaseConnector(
     @RequiresTransactionContext
     suspend fun <T> existingTransaction(block: suspend (tx: Transaction) -> T): T {
         val tx = TransactionManager.current()
+        tx.addLogger(StdOutSqlLogger)
         return tx.suspendedTransaction {
             block(this)
         }
