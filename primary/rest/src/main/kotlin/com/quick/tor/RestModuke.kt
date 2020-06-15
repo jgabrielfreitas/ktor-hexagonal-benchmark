@@ -15,7 +15,7 @@ val restModule = module(createdAtStart = true) {
     // controllers
     single { HelloWorldController(application = getApplication(), log = get()) }
     single { HealthCheckerController(application = getApplication(), log = get()) }
-    single { UserController(application = getApplication(), log = get(), userPort = get()) }
+    single { UserController(application = getApplication(), log = get()) }
 }
 
 private fun Scope.getApplication() = getProperty("application") as Application

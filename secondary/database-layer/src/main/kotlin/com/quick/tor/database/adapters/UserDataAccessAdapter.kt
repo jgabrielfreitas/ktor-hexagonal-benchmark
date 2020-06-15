@@ -1,5 +1,6 @@
 package com.quick.tor.database.adapters
 
+import com.quick.tor.database.dbo.toDbo
 import com.quick.tor.database.repository.UserRepositoryPort
 import com.quick.tor.log.Logger
 import com.quick.tor.usecases.user.port.secondary.UserDataAccessPort
@@ -12,15 +13,18 @@ class UserDataAccessAdapter(
 ): UserDataAccessPort {
 
     override suspend fun findById(id: UUID): User? {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        log.info("finding by id $id")
+        return userRepositoryPort.findById(id.toString())?.toModel()
     }
 
     override suspend fun update(user: User): User {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        log.info("trying to update $user")
+        return userRepositoryPort.update(user.toDbo()).toModel()
     }
 
     override suspend fun save(user: User): User {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        log.info("trying to save $user")
+        return userRepositoryPort.save(user.toDbo()).toModel()
     }
 
     override suspend fun findByIdempotency(idempotencyId: UUID): User? {

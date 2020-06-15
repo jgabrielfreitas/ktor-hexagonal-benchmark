@@ -16,7 +16,7 @@ fun Application.inject() {
 }
 
 fun main(args: Array<String>) {
-    val server = embeddedServer(Netty, port = 8080) {
+    val server = embeddedServer(Netty, port = 8090) {
         inject()
     }
     server.start(wait = true)

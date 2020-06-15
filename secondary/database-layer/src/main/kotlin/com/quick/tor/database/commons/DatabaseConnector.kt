@@ -12,7 +12,7 @@ import javax.sql.DataSource
 class DatabaseConnector(
     dataSource: DataSource
 ) {
-    val db: Database = Database.connect(datasource = dataSource)
+    private val db: Database = Database.connect(datasource = dataSource)
 
     @RequiresTransactionContext
     suspend fun <T> newTransaction(

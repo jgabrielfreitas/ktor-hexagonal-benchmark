@@ -31,13 +31,13 @@ class UserUseCase(
 //            savedUser
 //        }
 
-        return userDataAccessPort.update(user.withSendNotificationValidated())
+        return userDataAccessPort.save(user.withSendNotificationValidated())
     }
 
     override suspend fun findById(id: UUID): User? {
 
         log.info("trying to find user with id: $id")
-        val userFound = userDataAccessPort.findById(id) ?: throw UserNotFoundException(id.toString())
+        val userFound = userDataAccessPort.findById(id)
         log.info("found user: $userFound")
 
         return userFound

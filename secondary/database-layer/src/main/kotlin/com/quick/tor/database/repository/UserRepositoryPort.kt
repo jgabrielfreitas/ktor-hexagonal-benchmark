@@ -8,7 +8,6 @@ interface UserRepositoryPort {
     @RequiresTransactionContext
     suspend fun findByIdempotencyId(idempotencyId: String): UserDBO?
 
-    @RequiresTransactionContext
     suspend fun findById(id: String): UserDBO?
 
     @RequiresTransactionContext

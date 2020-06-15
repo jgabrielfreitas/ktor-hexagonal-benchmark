@@ -1,6 +1,7 @@
 package com.quick.tor.database.dbo
 
 import com.quick.tor.common.toUUID
+import com.quick.tor.database.commons.extentions.StringIdTable
 import com.quick.tor.database.dbo.Users.email
 import com.quick.tor.database.dbo.Users.id
 import com.quick.tor.database.dbo.Users.idempotencyId
@@ -8,37 +9,36 @@ import com.quick.tor.database.dbo.Users.name
 import com.quick.tor.database.dbo.Users.sentNotification
 import com.quick.tor.usecases.user.model.User
 import org.jetbrains.exposed.dao.id.EntityID
-import org.jetbrains.exposed.dao.id.UUIDTable
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.statements.InsertStatement
 import org.jetbrains.exposed.sql.statements.UpdateStatement
 import java.util.*
 
 
-object Users: UUIDTable("users") {
+object Users : StringIdTable("users") {
     var name = text("name")
     var email = text("email")
     var sentNotification = bool("sent_notification")
     var idempotencyId = text("idempotency_id")
 
     fun fromDbo(
-        it: InsertStatement<EntityID<UUID>>,
+        statement: InsertStatement<EntityID<String>>,
         userDbo: UserDBO
     ) {
-        it[name] = userDbo.name
-        it[email] = userDbo.email
-        it[sentNotification] = userDbo.sentNotification
-        it[idempotencyId] = userDbo.idempotencyId.toString()
+        statement[name] = userDbo.name
+        statement[email] = userDbo.email
+        statement[sentNotification] = userDbo.sentNotification
+        statement[idempotencyId] = userDbo.idempotencyId.toString()
     }
 
     fun fromDbo(
-        it: UpdateStatement,
+        statement: UpdateStatement,
         userDbo: UserDBO
     ) {
-        it[name] = userDbo.name
-        it[email] = userDbo.email
-        it[sentNotification] = userDbo.sentNotification
-        it[idempotencyId] = userDbo.idempotencyId.toString()
+        statement[name] = userDbo.name
+        statement[email] = userDbo.email
+        statement[sentNotification] = userDbo.sentNotification
+        statement[idempotencyId] = userDbo.idempotencyId.toString()
     }
 }
 
@@ -59,8 +59,17 @@ data class UserDBO(
         )
 }
 
+fun User.toDbo() =
+    UserDBO(
+        id = id,
+        name = name,
+        email = email,
+        sentNotification = sentNotification,
+        idempotencyId = idempotencyId
+    )
+
 fun ResultRow.toUserDbo() = UserDBO(
-    id = getOrNull(id)?.value,
+    id = getOrNull(id)?.value?.toUUID(),
     name = get(name),
     email = get(email),
     sentNotification = get(sentNotification),

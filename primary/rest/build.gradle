@@ -8,6 +8,7 @@ repositories {
 
 dependencies {
     api "io.ktor:ktor-server-netty:$ktor_version"
+    api "io.ktor:ktor-server-jetty:$ktor_version"
     api "ch.qos.logback:logback-classic:$logback_version"
     api "io.ktor:ktor-server-core:$ktor_version"
     api "io.ktor:ktor-gson:$ktor_version"
