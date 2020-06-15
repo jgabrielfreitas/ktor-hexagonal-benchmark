@@ -10,8 +10,8 @@ import io.ktor.routing.routing
 
 class HealthCheckerController(
     application: Application,
-    private val log: Logger
-) : BaseController(application) {
+    log: Logger
+) : BaseController(application, log) {
 
     init {
 
