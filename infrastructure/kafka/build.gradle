@@ -1,0 +1,8 @@
+apply plugin: 'kotlin'
+
+dependencies {
+    api project(':domain')
+
+//    implementation "io.confluent:kafka-avro-serializer:$confluent_kafka_avro"
+    implementation "org.apache.kafka:kafka-clients:$confluent_kafka_clients"
+}
