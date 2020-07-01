@@ -17,6 +17,14 @@ All necessary infrastructure is in the `docker-compose.yml`
 $ docker-compose up
 ```
 
+#### Tech in this project
+- [ktor](https://ktor.io/) to rest layer
+- [Exposed](https://github.com/JetBrains/Exposed) to database layer
+- [Kodein](https://kodein.org/Kodein-DI/) to dependency injection
+- [HikariCP](https://github.com/brettwooldridge/HikariCP) to connection pool optimization
+- [MySql](https://www.mysql.com/) to store data
+- [Kotlin](https://kotlinlang.org/) as lang
+
 ##### todo
 - [ ] fix Dockerfile
 - [ ] add database migration
