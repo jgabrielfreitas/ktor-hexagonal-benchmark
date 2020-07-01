@@ -5,11 +5,20 @@ import com.quick.tor.database.adapters.UserDataAccessAdapter
 import com.quick.tor.database.commons.DatabaseConnector
 import com.quick.tor.database.repository.UserRepositoryPort
 import com.quick.tor.database.repository.impl.UserRepositoryMysqlAdapter
+import com.quick.tor.domainModule
+import com.quick.tor.sharedModule
 import com.quick.tor.usecases.user.port.secondary.UserDataAccessPort
 import com.typesafe.config.Config
+import com.viartemev.ktor.flyway.FlywayFeature
+import com.viartemev.ktor.flyway.Migrate
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
+import io.ktor.application.Application
+import io.ktor.application.install
+import io.ktor.util.KtorExperimentalAPI
 import org.koin.dsl.module
+import org.koin.ktor.ext.Koin
+import org.koin.ktor.ext.get
 import java.util.Properties
 import javax.sql.DataSource
 
@@ -45,6 +54,13 @@ val databaseModule = module(createdAtStart = true) {
             userRepositoryPort = get(),
             log = get()
         )
+    }
+}
+
+fun Application.installFlyway() {
+    install(FlywayFeature) {
+        dataSource = get()
+        commands(Migrate)
     }
 }
 

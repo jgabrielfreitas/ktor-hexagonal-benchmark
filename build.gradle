@@ -9,6 +9,8 @@ buildscript {
         exposed = '0.25.1'
         hikaricp_version = '3.4.2'
         mysql_connector= '8.0.18'
+        flyway_core = '5.2.4'
+        flyway_feature = '1.0.0'
     }
 
     repositories {
