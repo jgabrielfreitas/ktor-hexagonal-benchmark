@@ -4,5 +4,5 @@ import java.lang.Exception
 
 interface Logger {
     fun info(message: String)
-    fun exception(message: String, exception: Exception)
+    fun error(message: String, exception: Exception)
 }

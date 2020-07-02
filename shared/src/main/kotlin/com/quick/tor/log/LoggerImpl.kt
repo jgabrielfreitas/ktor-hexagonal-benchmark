@@ -10,7 +10,7 @@ class LoggerImpl(
         logger.logger(this.toString()).info(message)
     }
 
-    override fun exception(message: String, exception: Exception) {
+    override fun error(message: String, exception: Exception) {
         logger.logger(this.toString()).catching(exception)
     }
 
