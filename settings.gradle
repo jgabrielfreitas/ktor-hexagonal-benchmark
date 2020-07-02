@@ -12,3 +12,8 @@ project(":rest").projectDir = file("primary/rest")
 // secondary
 include 'database-layer'
 project(":database-layer").projectDir = file("secondary/database-layer")
+
+// infrastructure
+include 'kafka'
+project(":kafka").projectDir = file("infrastructure/kafka")
+

@@ -42,5 +42,6 @@ allprojects {
     repositories {
         mavenLocal()
         jcenter()
+        maven { url 'https://packages.confluent.io/maven/' }
     }
 }
