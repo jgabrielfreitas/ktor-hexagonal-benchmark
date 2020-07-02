@@ -1,6 +1,7 @@
 import com.quick.tor.database.databaseModule
 import com.quick.tor.database.installFlyway
 import com.quick.tor.domainModule
+import com.quick.tor.kafka.installKafkaConsumers
 import com.quick.tor.restModule
 import com.quick.tor.sharedModule
 import io.ktor.application.Application
@@ -20,6 +21,7 @@ fun main(args: Array<String>) {
     val server = embeddedServer(Netty, port = 8090) {
         inject()
         installFlyway()
+        installKafkaConsumers()
     }
     server.start(wait = true)
 }

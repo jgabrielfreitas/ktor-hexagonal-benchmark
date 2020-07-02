@@ -3,7 +3,8 @@ apply plugin: 'kotlin'
 dependencies {
     api project(':domain')
 
-    implementation "io.confluent:kafka-avro-serializer:$kafka_avro_serializer"
-    implementation "org.apache.kafka:kafka-clients:$kafka_clients"
-    implementation "org.apache.kafka:connect-json:$kafka_clients"
+    api "io.confluent:kafka-avro-serializer:$kafka_avro_serializer"
+    api "org.apache.kafka:kafka-clients:$kafka_clients"
+    api "org.apache.kafka:connect-json:$kafka_clients"
+    api "com.sksamuel.avro4k:avro4k:0.14.0"
 }

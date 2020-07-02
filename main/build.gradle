@@ -9,5 +9,6 @@ repositories {
 dependencies {
     implementation project(':rest')
     implementation project(':database-layer')
+    implementation project(':kafka-consumer')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }

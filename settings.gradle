@@ -8,6 +8,9 @@ include 'shared'
 include 'rest'
 project(":rest").projectDir = file("primary/rest")
 
+include 'kafka-consumer'
+project(":kafka-consumer").projectDir = file("primary/kafka-consumer")
+
 
 // secondary
 include 'database-layer'
