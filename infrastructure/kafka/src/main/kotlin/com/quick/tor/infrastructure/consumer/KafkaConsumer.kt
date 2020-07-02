@@ -1,6 +1,6 @@
-package com.quick.tor.infrastructure.client.consumer
+package com.quick.tor.infrastructure.consumer
 
-import com.quick.tor.infrastructure.client.OffsetBehaviour
+import com.quick.tor.infrastructure.OffsetBehaviour
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG

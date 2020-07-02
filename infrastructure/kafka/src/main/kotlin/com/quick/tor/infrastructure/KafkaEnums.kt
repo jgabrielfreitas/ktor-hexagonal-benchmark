@@ -1,4 +1,4 @@
-package com.quick.tor.infrastructure.client
+package com.quick.tor.infrastructure
 
 enum class Acks(val value: String) {
     Zero("0"),
