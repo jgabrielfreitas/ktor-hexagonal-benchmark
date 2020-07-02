@@ -6,5 +6,5 @@ dependencies {
     api "io.confluent:kafka-avro-serializer:$kafka_avro_serializer"
     api "org.apache.kafka:kafka-clients:$kafka_clients"
     api "org.apache.kafka:connect-json:$kafka_clients"
-    api "com.sksamuel.avro4k:avro4k:0.14.0"
+    api "com.sksamuel.avro4k:avro4k-core:$avro4k_version"
 }
