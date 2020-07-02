@@ -11,10 +11,12 @@ project(":rest").projectDir = file("primary/rest")
 include 'kafka-consumer'
 project(":kafka-consumer").projectDir = file("primary/kafka-consumer")
 
-
 // secondary
 include 'database-layer'
 project(":database-layer").projectDir = file("secondary/database-layer")
+
+include 'kafka-producer'
+project(":kafka-producer").projectDir = file("secondary/kafka-producer")
 
 // infrastructure
 include 'kafka'

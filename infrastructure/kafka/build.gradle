@@ -7,4 +7,8 @@ dependencies {
     api "org.apache.kafka:kafka-clients:$kafka_clients"
     api "org.apache.kafka:connect-json:$kafka_clients"
     api "com.sksamuel.avro4k:avro4k-core:$avro4k_version"
+
+    api "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
+    api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    api "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
 }
