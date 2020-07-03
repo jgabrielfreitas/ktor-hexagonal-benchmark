@@ -4,12 +4,59 @@ import com.quick.tor.infrastructure.Acks
 import com.quick.tor.infrastructure.BatchSize
 import com.quick.tor.infrastructure.Compression
 import io.confluent.kafka.serializers.KafkaAvroSerializer
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import org.apache.avro.generic.GenericRecord
-import org.apache.kafka.clients.producer.KafkaProducer
-import org.apache.kafka.clients.producer.ProducerConfig
+import org.apache.kafka.clients.producer.*
 import org.apache.kafka.common.serialization.StringSerializer
+import kotlin.collections.set
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
 
-fun producer(
+
+suspend fun clientProducer(
+    topicName: String,
+    bootstrapServers: ProducerRecord<String, GenericRecord> = "localhost:9092",
+    record: ProducerRecord<String, GenericRecord>
+) {
+
+    producer(
+        topicName = topicName,
+        bootstrapServers = bootstrapServers,
+        record = record
+    )
+}
+
+suspend fun producer(
+    topicName: String,
+    bootstrapServers: String,
+    idempotence: Boolean = true,
+    acks: Acks = Acks.All,
+    retries: Int = Int.MAX_VALUE,
+    requestPerConnection: Int = 5,
+    compression: Compression = Compression.Snappy,
+    linger: Int = 20,
+    batchSize: BatchSize = BatchSize.ThirtyTwo,
+    schemmaUrl: String = "http://localhost:8081",
+    record: ProducerRecord<String, GenericRecord>
+) {
+    val producer = kafkaProducer(
+        bootstrapServers,
+        idempotence,
+        acks,
+        retries,
+        requestPerConnection,
+        compression,
+        linger,
+        batchSize,
+        schemmaUrl
+    )
+
+    coroutineScope { launch { producer.dispatch(record) } }
+}
+
+fun kafkaProducer(
     bootstrapServers: String,
     idempotence: Boolean,
     acks: Acks,
@@ -37,3 +84,12 @@ fun producer(
 }
 
 private const val SCHEMA_REGISTRY_URL = "schema.registry.url"
+
+suspend inline fun <reified K : Any, reified V : Any> KafkaProducer<K, V>.dispatch(record: ProducerRecord<K, V>) =
+    suspendCoroutine<RecordMetadata> { continuation ->
+        val callback = Callback { metadata, exception ->
+            if (metadata == null) continuation.resumeWithException(exception!!)
+            else continuation.resume(metadata)
+        }
+        this.send(record, callback)
+    }

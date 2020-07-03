@@ -10,5 +10,6 @@ dependencies {
     implementation project(':rest')
     implementation project(':database-layer')
     implementation project(':kafka-consumer')
+    implementation project(':kafka-producer')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 }

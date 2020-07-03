@@ -1,0 +1,30 @@
+package com.quick.tor.producer.adapter
+
+import com.quick.tor.infrastructure.producer.clientProducer
+import com.quick.tor.log.Logger
+import com.quick.tor.producer.dto.UserMessageDTO
+import com.quick.tor.producer.dto.toMessageDTO
+import com.quick.tor.usecases.user.model.UserEvent
+import com.quick.tor.usecases.user.port.secondary.UserNotificationPort
+import com.sksamuel.avro4k.Avro
+import org.apache.avro.generic.GenericRecord
+import org.apache.kafka.clients.producer.ProducerRecord
+
+class UserNotificationAdapter(
+    val logger: Logger
+): UserNotificationPort {
+
+    val topicNameToNofity: String = "create-client"
+
+    override suspend fun notify(userEvent: UserEvent) {
+
+        logger.info("notifying event: $userEvent")
+        val eventDto = userEvent.toMessageDTO()
+
+        val avroSchema = Avro.default.toRecord(UserMessageDTO.serializer(), eventDto)
+        val record = ProducerRecord<String, GenericRecord>(topicNameToNofity, eventDto.id, avroSchema)
+        clientProducer(topicName = topicNameToNofity, record = record)
+
+        logger.info("event published successfully")
+    }
+}
