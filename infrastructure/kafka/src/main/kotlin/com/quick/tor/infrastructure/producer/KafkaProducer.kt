@@ -17,7 +17,7 @@ import kotlin.coroutines.suspendCoroutine
 
 suspend fun clientProducer(
     topicName: String,
-    bootstrapServers: ProducerRecord<String, GenericRecord> = "localhost:9092",
+    bootstrapServers: String = "localhost:9092",
     record: ProducerRecord<String, GenericRecord>
 ) {
 
