@@ -14,7 +14,7 @@ class UserNotificationAdapter(
     val logger: Logger
 ): UserNotificationPort {
 
-    val topicNameToNofity: String = "create-client"
+    val topicNameToNofity: String = "user-event-created"
 
     override suspend fun notify(userEvent: UserEvent) {
 

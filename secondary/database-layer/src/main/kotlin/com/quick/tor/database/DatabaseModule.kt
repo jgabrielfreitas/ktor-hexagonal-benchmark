@@ -2,12 +2,16 @@ package com.quick.tor.database
 
 import com.quick.tor.config.ApplicationConfig
 import com.quick.tor.database.adapters.UserDataAccessAdapter
+import com.quick.tor.database.adapters.UserEventDataAccessAdapter
 import com.quick.tor.database.commons.DatabaseConnector
+import com.quick.tor.database.repository.EventRepositoryPort
 import com.quick.tor.database.repository.UserRepositoryPort
+import com.quick.tor.database.repository.impl.EventRepositoryMysqlAdapter
 import com.quick.tor.database.repository.impl.UserRepositoryMysqlAdapter
 import com.quick.tor.domainModule
 import com.quick.tor.sharedModule
 import com.quick.tor.usecases.user.port.secondary.UserDataAccessPort
+import com.quick.tor.usecases.user.port.secondary.UserEventDataAccessPort
 import com.typesafe.config.Config
 import com.viartemev.ktor.flyway.FlywayFeature
 import com.viartemev.ktor.flyway.Migrate
@@ -49,12 +53,27 @@ val databaseModule = module(createdAtStart = true) {
         )
     }
 
+    single<EventRepositoryPort> {
+        EventRepositoryMysqlAdapter(
+            dbConnector = get(),
+            log = get()
+        )
+    }
+
     single<UserDataAccessPort> {
         UserDataAccessAdapter(
             userRepositoryPort = get(),
             log = get()
         )
     }
+
+    single<UserEventDataAccessPort> {
+        UserEventDataAccessAdapter(
+            logger = get(),
+            eventRepositoryPort = get()
+        )
+    }
+
 }
 
 fun Application.installFlyway() {

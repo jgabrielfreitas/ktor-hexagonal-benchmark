@@ -8,7 +8,9 @@ val domainModule = module(createdAtStart = true) {
     single<UserPort> {
         UserUseCase(
             userDataAccessPort = get(),
-            log = get()
+            log = get(),
+            userNotificationPort = get(),
+            userEventDataAccessPort = get()
         )
     }
 }

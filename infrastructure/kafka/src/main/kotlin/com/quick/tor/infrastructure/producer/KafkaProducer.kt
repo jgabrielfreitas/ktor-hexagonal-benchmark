@@ -91,5 +91,5 @@ suspend inline fun <reified K : Any, reified V : Any> KafkaProducer<K, V>.dispat
             if (metadata == null) continuation.resumeWithException(exception!!)
             else continuation.resume(metadata)
         }
-        this.send(record, callback)
+        this.send(record, callback).get()
     }

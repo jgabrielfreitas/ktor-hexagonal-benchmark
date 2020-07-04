@@ -9,5 +9,12 @@
     </root>
     <logger name="org.eclipse.jetty" level="INFO"/>
     <logger name="org.apache.kafka" level="INFO"/>
+
+    <logger name="com.zaxxer.hikari.HikariConfig" level="OFF"/>
+    <logger name="com.zaxxer.hikari.pool.HikariPool" level="OFF"/>
+    <logger name="o.a.k.c.c.i.AbstractCoordinator" level="OFF"/>
+    <logger name="o.a.kafka.common.utils.AppInfoParser" level="OFF"/>
+    <logger name="org.apache.kafka.clients.Metadata" level="OFF"/>
+
     <logger name="io.netty" level="INFO"/>
 </configuration>

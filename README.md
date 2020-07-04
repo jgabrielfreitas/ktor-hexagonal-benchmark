@@ -27,6 +27,4 @@ $ docker-compose up
 
 ##### todo
 - [ ] fix Dockerfile
-- [ ] add database migration
-- [ ] add kafka consumer and producer
 - [ ] add tests with [Kluent](https://github.com/MarkusAmshove/Kluent)
