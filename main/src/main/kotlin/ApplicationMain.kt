@@ -8,6 +8,7 @@ import com.quick.tor.sharedModule
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.server.engine.embeddedServer
+import io.ktor.server.jetty.Jetty
 import io.ktor.server.netty.Netty
 import org.koin.ktor.ext.Koin
 

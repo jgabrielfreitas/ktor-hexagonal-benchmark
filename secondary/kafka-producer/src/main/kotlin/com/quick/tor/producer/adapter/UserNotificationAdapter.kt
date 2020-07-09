@@ -1,7 +1,7 @@
 package com.quick.tor.producer.adapter
 
-import com.quick.tor.infrastructure.producer.clientProducer
 import com.quick.tor.log.Logger
+import com.quick.tor.producer.KafkaProducerAdapter
 import com.quick.tor.producer.dto.UserMessageDTO
 import com.quick.tor.producer.dto.toMessageDTO
 import com.quick.tor.usecases.user.model.UserEvent
@@ -11,6 +11,7 @@ import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.producer.ProducerRecord
 
 class UserNotificationAdapter(
+    val producer: KafkaProducerAdapter,
     val logger: Logger
 ): UserNotificationPort {
 
@@ -23,7 +24,7 @@ class UserNotificationAdapter(
 
         val avroSchema = Avro.default.toRecord(UserMessageDTO.serializer(), eventDto)
         val record = ProducerRecord<String, GenericRecord>(topicNameToNofity, eventDto.id, avroSchema)
-        clientProducer(topicName = topicNameToNofity, record = record)
+        producer.send(topicName = topicNameToNofity, record = record)
 
         logger.info("event published successfully")
     }
