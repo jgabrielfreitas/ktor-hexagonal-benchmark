@@ -1,8 +1,5 @@
 package com.quick.tor.usecases.user
 
-import com.nhaarman.mockitokotlin2.times
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import com.quick.tor.log.Logger
 import com.quick.tor.usecases.user.port.secondary.UserDataAccessPort
 import com.quick.tor.usecases.user.port.secondary.UserEventDataAccessPort

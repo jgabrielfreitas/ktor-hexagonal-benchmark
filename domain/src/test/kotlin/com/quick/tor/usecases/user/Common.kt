@@ -8,7 +8,7 @@ import kotlin.coroutines.CoroutineContext
 import kotlin.coroutines.EmptyCoroutineContext
 
 private val uuid: UUID = UUID.fromString("003b9143-d101-4209-8243-c6ef65ccca78")
-val idempotencyId: UUID = UUID.fromString("003b9143-d101-4209-8243-c6ef65ccca78")
+val idempotencyId = uuid
 
 val savedUser = User(
     id = uuid,
