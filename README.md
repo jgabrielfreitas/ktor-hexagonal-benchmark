@@ -20,11 +20,34 @@ $ docker-compose up
 #### Tech in this project
 - [ktor](https://ktor.io/) to rest layer
 - [Exposed](https://github.com/JetBrains/Exposed) to database layer
-- [Kodein](https://kodein.org/Kodein-DI/) to dependency injection
+- [Koin](https://insert-koin.io/) to dependency injection
 - [HikariCP](https://github.com/brettwooldridge/HikariCP) to connection pool optimization
 - [MySql](https://www.mysql.com/) to store data
+- [JUnit5](https://junit.org/junit5/) as test framework
+- [Kluent](https://junit.org/junit5/) for fluent assertions
 - [Kotlin](https://kotlinlang.org/) as lang
 
-##### todo
-- [ ] fix Dockerfile
-- [ ] add tests with [Kluent](https://github.com/MarkusAmshove/Kluent)
+#### License
+```
+MIT License
+
+Copyright (c) 2020 João Freitas
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```

@@ -2,4 +2,9 @@ apply plugin: 'kotlin'
 
 dependencies {
     api project(':shared')
+
+
+    testImplementation "org.amshove.kluent:kluent:$kluent_version"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
+    testImplementation "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockito"
 }
