@@ -14,7 +14,7 @@ suspend fun consumerInsertUser(
 ) {
     clientConsumer(
         topic = "user-command-request",
-        group = "ktor-user-group--1",
+        group = "ktor-user-group",
         bootstrapServers = bootstrapServers,
         schemaUrl = schemaUrl,
 

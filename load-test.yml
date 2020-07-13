@@ -1,0 +1,22 @@
+config:
+  target: 'http://localhost:8090'
+  plugins:
+    uuid:
+      vars: [ 'randomUuid' ] # array of variable names
+  phases:
+    - duration: 5
+      arrivalRate: 20
+  defaults:
+    headers:
+      Content-Type: 'application/json'
+scenarios:
+  - flow:
+      - options:
+          url: '/'
+          beforeRequest: addUUID
+      - post:
+          url: "/users"
+          json:
+            name: "João {{ randomUuid }}"
+            email: "{{ randomUuid }}@fakemail.com"
+            idempotencyId: "{{ randomUuid }}"
