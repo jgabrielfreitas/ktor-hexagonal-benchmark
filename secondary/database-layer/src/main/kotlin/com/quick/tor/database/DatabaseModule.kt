@@ -4,12 +4,12 @@ import com.quick.tor.config.ApplicationConfig
 import com.quick.tor.database.adapters.UserDataAccessAdapter
 import com.quick.tor.database.adapters.UserEventDataAccessAdapter
 import com.quick.tor.database.commons.DatabaseConnector
+import com.quick.tor.database.commons.TransactionService
+import com.quick.tor.database.commons.TransactionServiceImpl
 import com.quick.tor.database.repository.EventRepositoryPort
 import com.quick.tor.database.repository.UserRepositoryPort
 import com.quick.tor.database.repository.impl.EventRepositoryMysqlAdapter
 import com.quick.tor.database.repository.impl.UserRepositoryMysqlAdapter
-import com.quick.tor.domainModule
-import com.quick.tor.sharedModule
 import com.quick.tor.usecases.user.port.secondary.UserDataAccessPort
 import com.quick.tor.usecases.user.port.secondary.UserEventDataAccessPort
 import com.typesafe.config.Config
@@ -19,9 +19,8 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.ktor.application.Application
 import io.ktor.application.install
-import io.ktor.util.KtorExperimentalAPI
+import org.jetbrains.exposed.sql.Database
 import org.koin.dsl.module
-import org.koin.ktor.ext.Koin
 import org.koin.ktor.ext.get
 import java.util.Properties
 import javax.sql.DataSource
@@ -38,24 +37,30 @@ val databaseModule = module(createdAtStart = true) {
             hikariConfig
         }
 
-        // Data source. We use 1 data source per 1 database. One data source may supply multiple connections.
         HikariDataSource(hikari)
     }
 
     single {
+
+//        val database: Database = Database.connect(datasource = get<DataSource>())
+
         DatabaseConnector(dataSource = get())
+    }
+
+    single<TransactionService> {
+        TransactionServiceImpl(dbConnector = get())
     }
 
     single<UserRepositoryPort> {
         UserRepositoryMysqlAdapter(
-            dbConnector = get(),
+            transactionService = get(),
             log = get()
         )
     }
 
     single<EventRepositoryPort> {
         EventRepositoryMysqlAdapter(
-            dbConnector = get(),
+            transactionService = get(),
             log = get()
         )
     }

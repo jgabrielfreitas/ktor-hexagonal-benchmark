@@ -10,6 +10,7 @@ import org.jetbrains.exposed.sql.transactions.experimental.suspendedTransaction
 import javax.sql.DataSource
 
 class DatabaseConnector(
+//    val db: Database
     dataSource: DataSource
 ) {
     private val db: Database = Database.connect(datasource = dataSource)
@@ -26,7 +27,6 @@ class DatabaseConnector(
     @RequiresTransactionContext
     suspend fun <T> existingTransaction(block: suspend (tx: Transaction) -> T): T {
         val tx = TransactionManager.current()
-        tx.addLogger(StdOutSqlLogger)
         return tx.suspendedTransaction {
             block(this)
         }
