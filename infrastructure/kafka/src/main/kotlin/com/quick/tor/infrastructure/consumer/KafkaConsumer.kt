@@ -1,39 +1,35 @@
 package com.quick.tor.infrastructure.consumer
 
 import com.quick.tor.infrastructure.OffsetBehaviour
+import com.quick.tor.infrastructure.OffsetBehaviour.Earliest
 import com.quick.tor.infrastructure.OffsetBehaviour.Latest
 import io.confluent.kafka.serializers.KafkaAvroDeserializer
 import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG
-import org.apache.kafka.clients.consumer.ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG
-import org.apache.kafka.clients.consumer.ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG
-import org.apache.kafka.clients.consumer.ConsumerConfig.GROUP_ID_CONFIG
-import org.apache.kafka.clients.consumer.ConsumerConfig.AUTO_OFFSET_RESET_CONFIG
-import org.apache.kafka.clients.consumer.ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG
-import org.apache.kafka.clients.consumer.ConsumerConfig.MAX_POLL_RECORDS_CONFIG
+import org.apache.kafka.clients.consumer.ConsumerConfig.*
 import org.apache.kafka.clients.consumer.KafkaConsumer
 import org.apache.kafka.common.serialization.StringDeserializer
 import java.time.Duration
 
 suspend fun clientConsumer(
     topic: String,
-    bootstrapServers: String = "localhost:9092",
+    bootstrapServers: String,
     group: String,
     autoCommit: Boolean = false,
     offsetBehaviour: OffsetBehaviour = Latest,
-    pollMax: Int = 10,
+    pollMax: Int = 100,
     pollDuration: Long = 1000,
     onReceiveRecord: suspend (record: GenericRecord) -> Unit,
-    schemaUrl: String = "http://localhost:8081"
+    onError: suspend (record: GenericRecord, exception: Exception) -> Unit,
+    schemaUrl: String
 ) {
     val consumer = kafkaConsumer(bootstrapServers, group, autoCommit, offsetBehaviour, pollMax, schemaUrl)
     consumer.subscribe(mutableListOf(topic))
     while(true) {
         val records = consumer.poll(Duration.ofMillis(pollDuration))
-        if (records.count() > 0) {
-            records.forEach {
-                onReceiveRecord(it.value())
-            }
+        records.forEach {
+            try { onReceiveRecord(it.value()) }
+            catch (e: Exception) { onError(it.value(), e) }
         }
     }
 }

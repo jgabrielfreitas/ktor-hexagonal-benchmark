@@ -10,14 +10,17 @@ import kotlinx.serialization.Serializable
 @AvroNamespace("dto")
 data class UserMessageDTO(
     val id: String,
-    @AvroName("Name")
+    @AvroName("name")
     val name: String,
-    @AvroName("IdempotencyId")
+    @Serializable
+    @AvroName("email")
+    val email: String,
+    @Serializable
+    @AvroName("idempotencyId")
     val idempotencyId: String,
-    @AvroName("CorrelationId")
-    val correlationId: String?,
-    @AvroName("Email")
-    val email: String
+    @Serializable
+    @AvroName("correlationId")
+    val correlationId: String?
 )
 
 fun UserEvent.toMessageDTO(correlationId: String? = null): UserMessageDTO =

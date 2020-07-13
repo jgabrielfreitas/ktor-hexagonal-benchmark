@@ -2,7 +2,7 @@ version: '3'
 volumes:
   user-data:
 services:
-  db_quickstart:
+  db_ktor_quickstart:
     image: mysql:5.7
     restart: always
     environment:
@@ -11,7 +11,7 @@ services:
       MYSQL_USER: quickstart_user
       MYSQL_PASSWORD: quickstart_pwd
     ports:
-      - "3303:3306"
+      - "3333:3306"
 
   zoo1:
     image: zookeeper:3.4.9

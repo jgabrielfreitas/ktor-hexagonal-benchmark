@@ -5,25 +5,26 @@ import com.quick.tor.usecases.user.model.User
 import com.sksamuel.avro4k.AvroName
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Serializer
 
 @Serializable
 @AvroName("UserDto")
 data class UserMessageDto(
-    @SerialName(value = "Name")
-    @AvroName("Name")
-    val Name: String,
+    @AvroName("name")
+    val name: String,
     @Serializable
-    val Email: String,
+    @AvroName("email")
+    val email: String,
     @Serializable
-    val IdempotencyId: String,
+    @AvroName("idempotencyId")
+    val idempotencyId: String,
     @Serializable
-    val CorrelationId: String?
+    @AvroName("correlationId")
+    val correlationId: String?
 ) {
 
     fun toModel() = User(
-        name = Name,
-        email = Email,
-        idempotencyId = IdempotencyId.toUUID()
+        name = name,
+        email = email,
+        idempotencyId = idempotencyId.toUUID()
     )
 }
