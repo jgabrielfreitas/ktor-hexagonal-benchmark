@@ -1,7 +1,6 @@
 package com.quick.tor.database.repository.impl
 
 import com.quick.tor.common.toUUID
-import com.quick.tor.database.commons.insertOrUpdate
 import com.quick.tor.database.commons.TransactionService
 import com.quick.tor.database.dbo.UserDBO
 import com.quick.tor.database.dbo.Users
