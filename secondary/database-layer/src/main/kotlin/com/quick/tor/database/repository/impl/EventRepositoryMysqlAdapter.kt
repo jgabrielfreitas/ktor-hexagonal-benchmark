@@ -1,5 +1,6 @@
 package com.quick.tor.database.repository.impl
 
+import com.quick.tor.RequiresTransactionContext
 import com.quick.tor.common.toUUID
 import com.quick.tor.database.commons.DatabaseConnector
 import com.quick.tor.database.commons.TransactionService
@@ -14,6 +15,8 @@ class EventRepositoryMysqlAdapter(
     private val transactionService: TransactionService,
     private val log: Logger
 ) : EventRepositoryPort {
+
+    @RequiresTransactionContext
     override suspend fun save(eventDBO: EventDBO): EventDBO {
         log.info("saving event: $eventDBO")
         val eventSavedId = transactionService.transaction {
@@ -26,6 +29,7 @@ class EventRepositoryMysqlAdapter(
         return eventDBO.copy(id = eventSavedId)
     }
 
+    @RequiresTransactionContext
     override suspend fun delete(eventDBO: EventDBO) {
         log.info("deleting event: $eventDBO")
         transactionService.transaction {

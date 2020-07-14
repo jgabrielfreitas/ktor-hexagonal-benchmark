@@ -1,5 +1,7 @@
 package com.quick.tor.usecases.user
 
+import com.quick.tor.RequiresTransactionContext
+import com.quick.tor.StartsNewTransaction
 import com.quick.tor.log.Logger
 import com.quick.tor.usecases.user.port.primary.UserPort
 import com.quick.tor.usecases.user.port.secondary.UserDataAccessPort
@@ -16,6 +18,7 @@ class UserUseCase(
     private val log: Logger
 ): UserPort {
 
+    @OptIn(RequiresTransactionContext::class)
     override suspend fun save(user: User): User {
 
         val existsUser = userDataAccessPort.findByIdempotency(user.idempotencyId)
@@ -37,6 +40,7 @@ class UserUseCase(
 
     }
 
+    @OptIn(RequiresTransactionContext::class)
     override suspend fun findById(id: UUID): User? {
 
         log.info("trying to find user with id: $id")
@@ -46,6 +50,7 @@ class UserUseCase(
         return userFound
     }
 
+    @OptIn(RequiresTransactionContext::class)
     override suspend fun update(user: User): User? {
 
         val updated = userDataAccessPort.update(user)

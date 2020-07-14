@@ -1,5 +1,7 @@
 package com.quick.tor.database.commons
 
+import com.quick.tor.RequiresTransactionContext
+
 class TransactionServiceImpl(
     private val dbConnector: DatabaseConnector
 ) : TransactionService {

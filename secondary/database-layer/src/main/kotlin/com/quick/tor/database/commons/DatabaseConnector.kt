@@ -1,19 +1,26 @@
 package com.quick.tor.database.commons
 
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.StdOutSqlLogger
-import org.jetbrains.exposed.sql.Transaction
-import org.jetbrains.exposed.sql.addLogger
+import com.quick.tor.RequiresTransactionContext
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.TransactionManager
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.experimental.suspendedTransaction
 import javax.sql.DataSource
 
 class DatabaseConnector(
-//    val db: Database
-    dataSource: DataSource
+    dataSource: DataSource,
+    private val preInitHandler: (DatabaseConnector.() -> Unit)? = null
 ) {
     private val db: Database = Database.connect(datasource = dataSource)
+
+//    init {
+//        runBlocking {
+//            @OptIn(RequiresTransactionContext::class) newTransaction {
+//                preInitHandler?.invoke(this@DatabaseConnector)
+//            }
+//        }
+//    }
 
     @RequiresTransactionContext
     suspend fun <T> newTransaction(
