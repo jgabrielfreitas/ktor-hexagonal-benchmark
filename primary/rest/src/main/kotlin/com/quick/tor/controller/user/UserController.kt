@@ -38,7 +38,7 @@ class UserController(
                 post {
                     val userDto = call.receive<UserDTO>()
                     val userSaveResult = userPort.save(userDto.toModel())
-                    call.respond(HttpStatusCode.OK, userSaveResult.toDto())
+                    call.respond(HttpStatusCode.OK, userSaveResult!!.toDto())
                 }
 
                 put("{id}") {

@@ -9,6 +9,7 @@ val domainModule = module(createdAtStart = true) {
         UserUseCase(
             userDataAccessPort = get(),
             log = get(),
+            transactionService = get(),
             userNotificationPort = get(),
             userEventDataAccessPort = get()
         )

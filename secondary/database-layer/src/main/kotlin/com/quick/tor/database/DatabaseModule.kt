@@ -4,7 +4,7 @@ import com.quick.tor.config.ApplicationConfig
 import com.quick.tor.database.adapters.UserDataAccessAdapter
 import com.quick.tor.database.adapters.UserEventDataAccessAdapter
 import com.quick.tor.database.commons.DatabaseConnector
-import com.quick.tor.database.commons.TransactionService
+import com.quick.tor.TransactionService
 import com.quick.tor.database.commons.TransactionServiceImpl
 import com.quick.tor.database.repository.EventRepositoryPort
 import com.quick.tor.database.repository.UserRepositoryPort
@@ -41,8 +41,6 @@ val databaseModule = module(createdAtStart = true) {
     }
 
     single {
-
-//        val database: Database = Database.connect(datasource = get<DataSource>())
 
         DatabaseConnector(dataSource = get())
     }
