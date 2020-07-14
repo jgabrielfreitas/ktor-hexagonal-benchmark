@@ -2,8 +2,7 @@ package com.quick.tor.database.repository.impl
 
 import com.quick.tor.RequiresTransactionContext
 import com.quick.tor.common.toUUID
-import com.quick.tor.database.commons.DatabaseConnector
-import com.quick.tor.database.commons.TransactionService
+import com.quick.tor.TransactionService
 import com.quick.tor.database.dbo.EventDBO
 import com.quick.tor.database.dbo.Events
 import com.quick.tor.database.repository.EventRepositoryPort

@@ -2,7 +2,7 @@ package com.quick.tor.database.repository.impl
 
 import com.quick.tor.RequiresTransactionContext
 import com.quick.tor.common.toUUID
-import com.quick.tor.database.commons.TransactionService
+import com.quick.tor.TransactionService
 import com.quick.tor.database.dbo.UserDBO
 import com.quick.tor.database.dbo.Users
 import com.quick.tor.database.dbo.toUserDbo

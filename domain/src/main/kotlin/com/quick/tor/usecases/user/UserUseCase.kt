@@ -2,6 +2,7 @@ package com.quick.tor.usecases.user
 
 import com.quick.tor.RequiresTransactionContext
 import com.quick.tor.StartsNewTransaction
+import com.quick.tor.TransactionService
 import com.quick.tor.log.Logger
 import com.quick.tor.usecases.user.port.primary.UserPort
 import com.quick.tor.usecases.user.port.secondary.UserDataAccessPort
@@ -15,20 +16,21 @@ class UserUseCase(
     private val userNotificationPort: UserNotificationPort,
     private val userDataAccessPort: UserDataAccessPort,
     private val userEventDataAccessPort: UserEventDataAccessPort,
+    private val transactionService: TransactionService,
     private val log: Logger
 ): UserPort {
 
     @OptIn(RequiresTransactionContext::class)
-    override suspend fun save(user: User): User {
+    override suspend fun save(user: User): User? = transactionService.transaction {
 
         val existsUser = userDataAccessPort.findByIdempotency(user.idempotencyId)
-        if (existsUser !== null) return existsUser
+        if (existsUser !== null) return@transaction existsUser
 
         val savedUser = userDataAccessPort.save(user)
         val event = UserEvent(user = savedUser)
         val savedEvent = userEventDataAccessPort.save(event)
 
-        return try {
+        return@transaction try {
             userNotificationPort.notify(savedEvent)
             userEventDataAccessPort.delete(savedEvent)
             userDataAccessPort.update(savedUser.withSendNotificationValidated())
@@ -41,17 +43,17 @@ class UserUseCase(
     }
 
     @OptIn(RequiresTransactionContext::class)
-    override suspend fun findById(id: UUID): User? {
+    override suspend fun findById(id: UUID): User? = transactionService.transaction {
 
         log.info("trying to find user with id: $id")
         val userFound = userDataAccessPort.findById(id)
         log.info("found user: $userFound")
 
-        return userFound
+        return@transaction userFound
     }
 
     @OptIn(RequiresTransactionContext::class)
-    override suspend fun update(user: User): User? {
+    override suspend fun update(user: User): User? = transactionService.transaction {
 
         val updated = userDataAccessPort.update(user)
         val eventUpdated = userEventDataAccessPort.save(UserEvent(user = updated))
@@ -65,7 +67,7 @@ class UserUseCase(
             log.error("Error in event", exception)
             // TODO retry
         }
-        return updated
+        return@transaction updated
     }
 
 }

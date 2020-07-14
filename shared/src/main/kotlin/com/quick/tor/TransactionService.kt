@@ -1,6 +1,4 @@
-package com.quick.tor.database.commons
-
-import com.quick.tor.RequiresTransactionContext
+package com.quick.tor
 
 interface TransactionService {
     /** Always starts new transaction. */
