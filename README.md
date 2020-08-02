@@ -1,3 +1,5 @@
+![Build](https://github.com/jgabrielfreitas/ktor-hexagonal-benchmark/workflows/Build/badge.svg?branch=master)
+
 # ktor-hexagonal-benchmark <img align="right" width="150" height="150" src="https://avatars1.githubusercontent.com/u/28214161?s=280&v=4">
 > a experimental ktor application using hexagonal architecture
 
