@@ -1,5 +1,6 @@
 package com.quick.tor.usecases.user
 
+import com.quick.tor.TransactionService
 import com.quick.tor.log.Logger
 import com.quick.tor.usecases.user.port.secondary.UserDataAccessPort
 import com.quick.tor.usecases.user.port.secondary.UserEventDataAccessPort
@@ -22,6 +23,9 @@ class UserUseCaseTest {
     private lateinit var eventDataAccessPort: UserEventDataAccessPort
 
     @Mock
+    private lateinit var transactionService: TransactionService
+
+    @Mock
     private lateinit var log: Logger
 
     private lateinit var userUseCase: UserUseCase
@@ -34,6 +38,7 @@ class UserUseCaseTest {
             notificationPort,
             dataAccessPort,
             eventDataAccessPort,
+            transactionService,
             log
         )
     }
