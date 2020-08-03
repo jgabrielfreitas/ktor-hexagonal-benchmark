@@ -1,14 +1,12 @@
+package com.quick.tor
+
 import com.quick.tor.database.databaseModule
 import com.quick.tor.database.installFlyway
-import com.quick.tor.domainModule
 import com.quick.tor.kafka.installKafkaConsumers
 import com.quick.tor.producer.kafkaProducerModule
-import com.quick.tor.restModule
-import com.quick.tor.sharedModule
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.jetty.Jetty
 import io.ktor.server.netty.Netty
 import org.koin.ktor.ext.Koin
 

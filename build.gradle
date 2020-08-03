@@ -23,6 +23,9 @@ buildscript {
         jupiter = '5.5.2'
         mockito = '2.2.0'
         kluent_version = '1.61'
+
+        // docker
+        shadow_version = '5.2.0'
     }
 
     repositories {
@@ -32,15 +35,20 @@ buildscript {
     dependencies {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath "com.github.jengelman.gradle.plugins:shadow:$shadow_version"
     }
 }
 
 apply plugin: 'kotlin'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'java'
 apply plugin: 'application'
 
 group 'com.quick.tor'
 version '0.0.1'
-mainClassName = "io.ktor.server.netty.EngineMain"
+//mainClassName = "io.ktor.server.netty.EngineMain"
+mainClassName = 'com.quick.tor.ApplicationMainKt'
+
 
 repositories {
     mavenLocal()
@@ -77,8 +85,12 @@ sourceSets {
             useExperimentalAnnotation('com.quick.tor.OptInAnnotation')
         }
     }
+    main.kotlin.srcDirs = [ 'src' ]
+    main.resources.srcDirs = [ 'resources' ]
 }
 
-tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-    kotlinOptions.freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
+shadowJar {
+    archiveBaseName = 'quicktor'
+    archiveClassifier = ''
+    archiveVersion = ''
 }
