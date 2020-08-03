@@ -1,7 +1,8 @@
-![Build](https://github.com/jgabrielfreitas/ktor-hexagonal-benchmark/workflows/Build/badge.svg?branch=master)
-
 # ktor-hexagonal-benchmark <img align="right" width="150" height="150" src="https://avatars1.githubusercontent.com/u/28214161?s=280&v=4">
 > a experimental ktor application using hexagonal architecture
+
+![Build](https://github.com/jgabrielfreitas/ktor-hexagonal-benchmark/workflows/Build/badge.svg?branch=master) ![License](https://img.shields.io/github/license/jgabrielfreitas/ktor-hexagonal-benchmark) ![Twitter](https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Ftwitter.com%2Fjgabrielfreitas) 
+
 
 #### About
 This is a simple user registration application by a kafka command or rest.
