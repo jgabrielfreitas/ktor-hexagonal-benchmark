@@ -65,11 +65,4 @@ fun kafkaProducer(
 
 private const val SCHEMA_REGISTRY_URL = "schema.registry.url"
 
-suspend inline fun <reified K : Any, reified V : Any> KafkaProducer<K, V>.dispatch(record: ProducerRecord<K, V>) =
-    suspendCoroutine<RecordMetadata> { continuation ->
-        val callback = Callback { metadata, exception ->
-            if (metadata == null) continuation.resumeWithException(exception!!)
-            else continuation.resume(metadata)
-        }
-        this.send(record, callback).get()
-    }
+inline fun <reified K : Any, reified V : Any> KafkaProducer<K, V>.dispatch(record: ProducerRecord<K, V>) = this.send(record).get()
