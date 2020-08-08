@@ -1,4 +1,6 @@
 apply plugin: 'kotlin'
+apply plugin: 'com.github.johnrengelman.shadow'
+
 
 repositories {
     mavenCentral()
@@ -12,4 +14,17 @@ dependencies {
     implementation project(':kafka-consumer')
     implementation project(':kafka-producer')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.quick.tor.ApplicationMainKt'
+        attributes 'Start-Class': 'com.quick.tor.ApplicationMainKt'
+    }
+}
+
+shadowJar {
+    archiveBaseName = 'ktor'
+    archiveClassifier = ''
+    archiveVersion = ''
 }

@@ -25,7 +25,7 @@ buildscript {
         kluent_version = '1.61'
 
         // docker
-        shadow_version = '5.2.0'
+        shadow_version = '5.0.0'
     }
 
     repositories {
@@ -46,9 +46,7 @@ apply plugin: 'application'
 
 group 'com.quick.tor'
 version '0.0.1'
-//mainClassName = "io.ktor.server.netty.EngineMain"
-mainClassName = 'com.quick.tor.ApplicationMainKt'
-
+mainClassName = "com.quick.tor.ApplicationMainKt"
 
 repositories {
     mavenLocal()
@@ -87,6 +85,13 @@ sourceSets {
     }
     main.kotlin.srcDirs = [ 'src' ]
     main.resources.srcDirs = [ 'resources' ]
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'com.quick.tor.ApplicationMainKt'
+        attributes 'Start-Class': 'com.quick.tor.ApplicationMainKt'
+    }
 }
 
 shadowJar {
