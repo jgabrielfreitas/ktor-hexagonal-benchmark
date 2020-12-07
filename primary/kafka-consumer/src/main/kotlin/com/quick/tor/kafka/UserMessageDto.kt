@@ -1,9 +1,8 @@
 package com.quick.tor.kafka
 
+import com.github.avrokotlin.avro4k.AvroName
 import com.quick.tor.common.toUUID
 import com.quick.tor.usecases.user.model.User
-import com.sksamuel.avro4k.AvroName
-import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable

@@ -1,12 +1,12 @@
 package com.quick.tor.producer.adapter
 
+import com.github.avrokotlin.avro4k.Avro
 import com.quick.tor.log.Logger
 import com.quick.tor.producer.KafkaProducerAdapter
 import com.quick.tor.producer.dto.UserMessageDTO
 import com.quick.tor.producer.dto.toMessageDTO
 import com.quick.tor.usecases.user.model.UserEvent
 import com.quick.tor.usecases.user.port.secondary.UserNotificationPort
-import com.sksamuel.avro4k.Avro
 import org.apache.avro.generic.GenericRecord
 import org.apache.kafka.clients.producer.ProducerRecord
 

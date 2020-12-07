@@ -1,8 +1,8 @@
 package com.quick.tor.producer.dto
 
+import com.github.avrokotlin.avro4k.AvroName
+import com.github.avrokotlin.avro4k.AvroNamespace
 import com.quick.tor.usecases.user.model.UserEvent
-import com.sksamuel.avro4k.AvroName
-import com.sksamuel.avro4k.AvroNamespace
 import kotlinx.serialization.Serializable
 
 @Serializable
