@@ -1,10 +1,10 @@
 package com.quick.tor.kafka.consumer
 
+import com.github.avrokotlin.avro4k.Avro
 import com.quick.tor.infrastructure.consumer.clientConsumer
 import com.quick.tor.kafka.UserMessageDto
 import com.quick.tor.log.Logger
 import com.quick.tor.usecases.user.port.primary.UserPort
-import com.sksamuel.avro4k.Avro
 
 suspend fun consumerInsertUser(
     bootstrapServers: String,
@@ -13,7 +13,7 @@ suspend fun consumerInsertUser(
     log: Logger
 ) {
     clientConsumer(
-        topic = "user-command-request",
+        topic = "user-event-created",
         group = "ktor-user-group",
         bootstrapServers = bootstrapServers,
         schemaUrl = schemaUrl,
