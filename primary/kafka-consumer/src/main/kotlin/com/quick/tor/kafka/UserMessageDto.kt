@@ -8,6 +8,8 @@ import kotlinx.serialization.Serializable
 @Serializable
 @AvroName("UserDto")
 data class UserMessageDto(
+    @AvroName("id")
+    val id: String,
     @AvroName("name")
     val name: String,
     @Serializable
