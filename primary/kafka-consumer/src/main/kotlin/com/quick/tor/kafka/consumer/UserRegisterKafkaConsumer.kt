@@ -13,7 +13,7 @@ suspend fun consumerInsertUser(
     log: Logger
 ) {
     clientConsumer(
-        topic = "user-event-created",
+        topic = "user-event",
         group = "ktor-user-group",
         bootstrapServers = bootstrapServers,
         schemaUrl = schemaUrl,
