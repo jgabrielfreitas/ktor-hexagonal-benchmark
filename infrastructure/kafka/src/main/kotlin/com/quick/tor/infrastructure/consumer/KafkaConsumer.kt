@@ -16,7 +16,7 @@ suspend fun clientConsumer(
     bootstrapServers: String,
     group: String,
     autoCommit: Boolean = false,
-    offsetBehaviour: OffsetBehaviour = Latest,
+    offsetBehaviour: OffsetBehaviour = Earliest,
     pollMax: Int = 100,
     pollDuration: Long = 1000,
     onReceiveRecord: suspend (record: GenericRecord) -> Unit,
@@ -28,7 +28,10 @@ suspend fun clientConsumer(
     while(true) {
         val records = consumer.poll(Duration.ofMillis(pollDuration))
         records.forEach {
-            try { onReceiveRecord(it.value()) }
+            try {
+                onReceiveRecord(it.value())
+                consumer.commitAsync()
+            }
             catch (e: Exception) { onError(it.value(), e) }
         }
     }
