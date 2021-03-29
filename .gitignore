@@ -32,4 +32,12 @@ hs_err_pid*
 build
 
 .DS_Store
+.project
+.classpath
+
+# temp files
+/tmp
+
+# vscode
+.vscode
 
