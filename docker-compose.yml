@@ -23,11 +23,11 @@ services:
       ZOO_PORT: 2181
       ZOO_SERVERS: server.1=zoo1:2888:3888
     volumes:
-      - /tmp/kafka/zoo1/data:/data
-      - /tmp/kafka/zoo1/datalog:/datalog
+      - ./tmp/kafka/zoo1/data:/data
+      - ./tmp/kafka/zoo1/datalog:/datalog
 
   kafka1:
-    image: confluentinc/cp-kafka:latest
+    image: confluentinc/cp-kafka:5.5.1
     hostname: kafka1
     ports:
       - "9092:9092"
@@ -40,7 +40,7 @@ services:
       KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
     volumes:
-      - /tmp/kafka/kafka1/data:/var/lib/kafka/data
+      - ./tmp/kafka/kafka1/data:/var/lib/kafka/data
     depends_on:
       - zoo1
     links:
