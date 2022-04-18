@@ -6,21 +6,27 @@ import com.quick.tor.controller.user.dto.UserDTO
 import com.quick.tor.controller.user.dto.toDto
 import com.quick.tor.log.Logger
 import com.quick.tor.usecases.user.port.primary.UserPort
-import io.ktor.application.Application
-import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.http.HttpStatusCode.Companion.NotFound
-import io.ktor.request.receive
-import io.ktor.response.respond
-import io.ktor.routing.*
+import io.ktor.server.application.Application
+import io.ktor.server.application.call
+import io.ktor.server.request.receive
+import io.ktor.server.response.respond
+import io.ktor.server.routing.get
+import io.ktor.server.routing.post
+import io.ktor.server.routing.put
+import io.ktor.server.routing.route
+import io.ktor.server.routing.routing
+import org.koin.experimental.property.inject
 import org.koin.ktor.ext.inject
 
 class UserController(
     application: Application,
-    log: Logger
+    log: Logger,
+    userPort: UserPort
 ) : BaseController(application, log) {
 
-    private val userPort by application.inject<UserPort>()
+//    private val userPort by application.inject<UserPort>()
 
     init {
 

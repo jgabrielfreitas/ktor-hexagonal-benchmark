@@ -2,6 +2,7 @@ apply plugin: 'kotlin'
 
 dependencies {
     api project(':domain')
+    implementation "io.ktor:ktor-server:$ktor_version"
     implementation "com.zaxxer:HikariCP:$hikaricp_version"
     implementation "mysql:mysql-connector-java:$mysql_connector"
     implementation "org.jetbrains.exposed:exposed-core:$exposed"

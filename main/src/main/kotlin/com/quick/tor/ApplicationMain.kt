@@ -4,8 +4,8 @@ import com.quick.tor.database.databaseModule
 import com.quick.tor.database.installFlyway
 import com.quick.tor.kafka.installKafkaConsumers
 import com.quick.tor.producer.kafkaProducerModule
-import io.ktor.application.Application
-import io.ktor.application.install
+import io.ktor.server.application.Application
+import io.ktor.server.application.install
 import io.ktor.server.engine.embeddedServer
 import io.ktor.server.netty.Netty
 import org.koin.ktor.ext.Koin

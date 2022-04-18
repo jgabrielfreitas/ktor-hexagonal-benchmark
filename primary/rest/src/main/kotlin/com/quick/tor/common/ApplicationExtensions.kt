@@ -1,11 +1,9 @@
 package com.quick.tor.common
 
 import com.quick.tor.common.exceptions.RestMissingRequestParameterException
-import io.ktor.application.ApplicationCall
 import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
-import io.ktor.request.uri
-import io.ktor.response.respond
+import io.ktor.server.application.ApplicationCall
+import io.ktor.server.request.receive
 
 internal suspend inline fun <reified T : Any> ApplicationCall.receiveValidated(): T {
     return try {

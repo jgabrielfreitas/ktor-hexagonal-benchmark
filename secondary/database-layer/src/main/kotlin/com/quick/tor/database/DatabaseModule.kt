@@ -13,12 +13,13 @@ import com.quick.tor.database.repository.impl.UserRepositoryMysqlAdapter
 import com.quick.tor.usecases.user.port.secondary.UserDataAccessPort
 import com.quick.tor.usecases.user.port.secondary.UserEventDataAccessPort
 import com.typesafe.config.Config
+import com.viartemev.ktor.flyway.FlywayCommand
 import com.viartemev.ktor.flyway.FlywayFeature
 import com.viartemev.ktor.flyway.Migrate
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
-import io.ktor.application.Application
-import io.ktor.application.install
+import io.ktor.server.application.Application
+import io.ktor.server.application.install
 import org.jetbrains.exposed.sql.Database
 import org.koin.dsl.module
 import org.koin.ktor.ext.get
