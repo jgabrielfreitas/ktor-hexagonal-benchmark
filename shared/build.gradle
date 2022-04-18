@@ -2,7 +2,7 @@ apply plugin: 'kotlin'
 
 dependencies {
     api "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api "org.koin:koin-ktor:$koin_version"
+    api "io.insert-koin:koin-ktor:$koin_version"
     implementation "com.google.code.gson:gson:$gson_version"
     implementation "io.github.microutils:kotlin-logging:$kotlin_logging"
 }
