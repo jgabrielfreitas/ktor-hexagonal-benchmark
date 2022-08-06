@@ -1,7 +1,7 @@
 buildscript {
 
     ext {
-        ktor_version = '1.5.3-SNAPSHOT'
+        ktor_version = '1.6.8'
         kotlin_version = "$kotlin_version"
         serialization_version = '1.0.1'
         gson_version = '2.8.6'
@@ -85,8 +85,8 @@ compileKotlin {
 sourceSets {
     all {
         languageSettings {
-            useExperimentalAnnotation('com.quick.tor.RequiresTransactionContext')
-            useExperimentalAnnotation('com.quick.tor.OptInAnnotation')
+//            useExperimentalAnnotation('com.quick.tor.RequiresTransactionContext')
+//            useExperimentalAnnotation('com.quick.tor.OptInAnnotation')
         }
     }
     main.kotlin.srcDirs = [ 'src' ]
